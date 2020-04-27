@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+
+  api:
+    build: ./api
+    image: api-skeleton
+    container_name: api
+    restart: always
+    environment:
+      - APP_NAME=MyFlaskApp
+    expose:
+      - 8080
+
+  nginx:
+    build: ./nginx
+    image: nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
