@@ -19,3 +19,12 @@ services:
     restart: always
     ports:
       - "80:80"
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_INITDB_DATABASE: swapi
+    ports:
+      - "27017:27017"
