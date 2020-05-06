@@ -18,8 +18,6 @@ class PwdException(Exception):
 
 class PwdField(fields.String):
     def _serialize(self, value, attr, obj, **kwargs):
-        import ipdb
-        ipdb.set_trace()
         raise PwdException("Not allowed.")
 
     def _deserialize(self, value, attr, data, **kwargs):
