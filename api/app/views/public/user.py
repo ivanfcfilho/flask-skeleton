@@ -3,7 +3,6 @@ from flask_restplus import Namespace, Resource
 from flask import current_app
 
 from app.decorators.check_body import check_body
-from app.decorators.db_connect import db_connect
 from app.models.user_model import UserModel
 from app.views.db_api import DBApi
 from app.http_responses.http_responses import conflict
