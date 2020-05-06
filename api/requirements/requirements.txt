@@ -4,3 +4,6 @@ flask-cors==3.0.8
 flask-restplus==0.13.0
 Werkzeug==0.16.1
 pymongo==3.10.1
+marshmallow==3.5.2
+bcrypt==3.1.7
+pymodm==0.4.3
