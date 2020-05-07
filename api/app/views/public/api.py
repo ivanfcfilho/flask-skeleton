@@ -1,8 +1,7 @@
-from flask_restplus import Api
-from flask import Blueprint
-
 from app.views.public.health_check import health_check_ns
 from app.views.public.user import user_ns
+from flask import Blueprint
+from flask_restplus import Api
 
 public_bp = Blueprint("public_api", __name__)
 

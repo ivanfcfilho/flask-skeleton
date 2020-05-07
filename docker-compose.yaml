@@ -4,11 +4,11 @@ services:
 
   api:
     build: ./api
-    image: api-skeleton
-    container_name: api
+    image: flask-skeleton
+    container_name: flask-skeleton
     restart: always
     environment:
-      - APP_NAME=MyFlaskApp
+      - APP_NAME=Skeleton
     expose:
       - 8080
 
@@ -25,6 +25,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123456
-      MONGO_INITDB_DATABASE: swapi
+      MONGO_INITDB_DATABASE: skeleton
     ports:
       - "27017:27017"

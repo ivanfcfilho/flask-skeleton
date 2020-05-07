@@ -1,12 +1,9 @@
 import os
 
-
+from app.views.public.api import public_bp
 from flask import Flask, jsonify
 from flask_cors import CORS
 from werkzeug.exceptions import HTTPException
-
-
-from app.views.public.api import public_bp
 
 
 def make_app():
@@ -29,6 +26,7 @@ def make_app():
     @application.errorhandler(Exception)
     def handle_error(e):
         code = 500
+        import ipdb; ipdb.set_trace()
         if isinstance(e, HTTPException):
             code = e.code
         return jsonify(error=str(e)), code

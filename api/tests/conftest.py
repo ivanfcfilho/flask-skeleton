@@ -1,6 +1,7 @@
+import os
+
 import pytest
 from pymongo import MongoClient
-import os
 
 from run import make_app
 

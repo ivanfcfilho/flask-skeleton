@@ -5,8 +5,6 @@ from marshmallow import Schema
 from marshmallow.exceptions import ValidationError
 from werkzeug.exceptions import BadRequest
 
-from app.http_responses.http_responses import badrequest
-
 
 def check_body(schema):
     def real_decorator(func):
@@ -16,10 +14,12 @@ def check_body(schema):
             mult_form_data = "multipart/form-data"
 
             content_type = request.content_type
+            if not content_type:
+                return BadRequest("Content-Type ")
 
             if content_type != application_json and mult_form_data not in content_type:
                 msg = f'Content-Type must be "{application_json}" or "{mult_form_data}"'
-                return badrequest(msg)
+                return BadRequest(msg)
 
             try:
                 r_json = request.get_json()
@@ -35,7 +35,7 @@ def check_body(schema):
                 document = serial.load(r_json)
                 kwargs["data"] = document
             except ValidationError as e:
-                return badrequest(e.messages)
+                return BadRequest(e.messages)
 
             return func(*args, **kwargs)
 
