@@ -8,8 +8,8 @@ from app.schemas.user_schema import UserSchema
 class DBApi(Resource):
     def __init__(self, _):
         with current_app.app_context():
-            # Connect to MongoDB and call the connection "my-app".
             try:
                 connect(current_app.config["MONGO_URL"])
             except Exception as e:
-                x = 2
+                # TODO: What is the best way to handle ? Which message ?
+                pass
