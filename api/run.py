@@ -1,17 +1,16 @@
 import os
 
-import os
 
 from flask import Flask, jsonify
 from flask_cors import CORS
-from werkzeug.exceptions import InternalServerError, NotFound
+from werkzeug.exceptions import HTTPException
 
 
 from app.views.public.api import public_bp
 
 
 def make_app():
-    environment = os.environ.get("APPLICATION_ENV", "development")
+    environment = os.environ.get("APPLICATION_ENV", "local")
 
     application = Flask(__name__)
     application.config.from_object("config.default")
@@ -27,13 +26,12 @@ def make_app():
         # TODO: Log
         pass
 
-    @application.errorhandler(NotFound)
-    def handle_404(_):
-        return jsonify({"message": "The URL requested doesn't exist"}), 404
-
-    @application.errorhandler(InternalServerError)
-    def handle_500(_):
-        return jsonify({"message": "Internal Server Error"}), 500
+    @application.errorhandler(Exception)
+    def handle_error(e):
+        code = 500
+        if isinstance(e, HTTPException):
+            code = e.code
+        return jsonify(error=str(e)), code
 
     return application
 
