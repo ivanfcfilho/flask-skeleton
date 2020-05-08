@@ -1,5 +1,6 @@
-from app.views.resources.custom_fields import ObjectIDField, PwdField
 from marshmallow import Schema, fields
+
+from app.views.resources.custom_fields import ObjectIDField, PwdField
 
 
 class UserResource(Schema):

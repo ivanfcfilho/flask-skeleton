@@ -15,11 +15,11 @@ def check_body(schema):
 
             content_type = request.content_type
             if not content_type:
-                return BadRequest("Content-Type ")
+                raise BadRequest("Content-Type header is mandatory.")
 
             if content_type != application_json and mult_form_data not in content_type:
                 msg = f'Content-Type must be "{application_json}" or "{mult_form_data}"'
-                return BadRequest(msg)
+                raise BadRequest(msg)
 
             try:
                 r_json = request.get_json()
@@ -35,7 +35,7 @@ def check_body(schema):
                 document = serial.load(r_json)
                 kwargs["data"] = document
             except ValidationError as e:
-                return BadRequest(e.messages)
+                raise BadRequest(e.messages)
 
             return func(*args, **kwargs)
 

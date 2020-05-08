@@ -1,6 +1,8 @@
 import os
 
+import pymodm.connection as connection
 import pytest
+from pymodm.connection import connect
 from pymongo import MongoClient
 
 from run import make_app
@@ -16,9 +18,8 @@ def tst(session):
     os.environ["APPLICATION_ENV"] = "testing"
     application = make_app()
     session.client = application.test_client()
-    client = MongoClient(application.config["MONGO_URL"], connect=False)
-    database = client[application.config["MONGO_DB"]]
-    session.db = database
     with application.app_context():
+        connection.connect(application.config["MONGO_URL"])
         yield session
+    client = connection._get_connection().database.client
     client.drop_database(application.config["MONGO_DB"])
