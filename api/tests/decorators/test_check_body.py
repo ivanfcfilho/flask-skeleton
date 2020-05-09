@@ -10,9 +10,8 @@ from app.views.resources.user_resource import UserResource
 
 def test_check_body_wrong_content_type(tst, mocker):
     """
-    Test if content-type request headers
-    First test if is None, then test if is not none,
-    but is not what is expected
+    Test for invalid content-type header.
+    First test for None, then test for invalid one.
     """
 
     l_content_type = [None, "text/html"]
@@ -38,8 +37,7 @@ def test_check_body_wrong_content_type(tst, mocker):
 
 def test_check_body_empty_json(tst, mocker):
     """
-    Test if json is empty.
-    json cant be empty
+    Test if json is not empty.
     """
     with tst.context:
         # mock flask request content_type
@@ -67,8 +65,8 @@ def test_check_body_empty_json(tst, mocker):
 
 def test_check_body_invalid_schema(tst, mocker):
     """
-    Test if with an invalid json,
-    application will throw marshmallow exception
+    Test for invalid payload json.
+    Application must throw marshmallow exception.
     """
     with tst.context:
         # mock flask request content_type
@@ -101,7 +99,7 @@ def test_check_body_invalid_schema(tst, mocker):
 
 def test_check_body_valid_schema(tst, mocker):
     """
-    Json will be send and everything works as expected.
+    Json will be send and everything must work as expected.
     data will be returned as argument of test_func
     """
     with tst.context:
