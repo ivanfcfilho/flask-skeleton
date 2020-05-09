@@ -18,6 +18,7 @@ def tst(session):
     os.environ["APPLICATION_ENV"] = "testing"
     application = make_app()
     session.client = application.test_client()
+    session.context = application.test_request_context()
     with application.app_context():
         connection.connect(application.config["MONGO_URL"])
         yield session
