@@ -1,4 +1,3 @@
-
 import json
 
 import pytest
@@ -82,10 +81,12 @@ def test_check_body_invalid_schema(tst, mocker):
             return
 
         # define message should be returned from decorator
-        expected_msg = {"email": ["Missing data for required field."],
-                        "password": ["Missing data for required field."],
-                        "name": ["Missing data for required field."],
-                        "phone": ["Unknown field."]}
+        expected_msg = {
+            "email": ["Missing data for required field."],
+            "password": ["Missing data for required field."],
+            "name": ["Missing data for required field."],
+            "phone": ["Unknown field."],
+        }
 
         with pytest.raises(BadRequest) as excinfo:
             # call function to test decorator
@@ -93,7 +94,9 @@ def test_check_body_invalid_schema(tst, mocker):
 
         # assert expected message
 
-        assert expected_msg == json.loads(str(excinfo.value).split("Request:")[1:][0].replace("'", '"'))
+        assert expected_msg == json.loads(
+            str(excinfo.value).split("Request:")[1:][0].replace("'", '"')
+        )
 
 
 def test_check_body_valid_schema(tst, mocker):

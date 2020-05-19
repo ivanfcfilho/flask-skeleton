@@ -14,7 +14,7 @@ def make_app():
     application.config.from_object(f"config.{environment}")
 
     # TODO: CORS on production only from origin on AWS
-    CORS(application)
+    # CORS(application)
 
     application.register_blueprint(public_bp)
 
